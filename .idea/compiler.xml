@@ -7,13 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="StatusAndMess8085" />
-        <module name="UploadFile8082" />
-        <module name="SpringCloudGateWay8080" />
-        <module name="EurekaSever8761" />
-        <module name="SpringBatch8084" />
         <module name="SpringBatch" />
-        <module name="UserSpringJPA8081" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
