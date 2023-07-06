@@ -1,0 +1,9 @@
+file:
+  input: inputclone
+  output: outputclone
+school:
+  industry:
+    class:
+      clone: class clone
+    room:
+      clone: room clone

@@ -1,0 +1,54 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /batch
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    include: clone
+  #    active: local
+  #    default: local
+
+  #    include: clone, local
+  application:
+    name: Client-Service-SpringBatch8084
+  batch:
+    job:
+      enabled: false
+#  main:
+#    allow-circular-references: true
+
+myHostService:
+  springJPA8081: "http://localhost:8081/user"
+  springBatch8084: "http://localhost:8084/batch"
+  statusAndMess8085: "http://localhost:8085/api"
+  uploadFile8082: "http://localhost:8082/upload"
+myDetailService:
+  springJPA8081:
+    getDataWithUserEmailDTO: "/SpringJPA/getDataWithUserEmailDTO"
+    addUserGetString: "/SpringJPA/addUserGetString"
+myMail:
+  test: "akihoakana@gmail.com"
+  testFrom:
+    username: "demotest1a23456789@gmail.com"
+    password: "xfoganmrtdjxesny"
+myFile:
+  inputData1: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\inputData1.csv"
+  inputData2: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\inputData2.csv"
+  inputData3: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\inputData3.csv"
+  inputSaveDB: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\inputSaveDB.csv"
+  output1: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\output1.csv"
+  output2: "C:\\Users\\dai.dang\\Desktop\\MyGithub\\InternProject\\SpringBatch8084\\src\\main\\resources\\output2.csv"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    initial-status: up
+    status-page-url-path: /info
+    home-page-url-path: /home
+    health-check-url: /health

@@ -1,0 +1,62 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /upload
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  application:
+    name: Client-Service-UploadFile8082
+  datasource:
+    url: jdbc:postgresql://localhost:5432/image
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    initial-status: up
+    status-page-url-path: /info
+    home-page-url-path: /home
+    health-check-url: /health
+
+myMail:
+  test: "akihoakana@gmail.com"
+  testFrom:
+    username: "demotest1a23456789@gmail.com"
+    password: "xfoganmrtdjxesny"
+myHostService:
+  springJPA8081: "http://localhost:8081/user"
+  springBatch8084: "http://localhost:8084/batch"
+  statusAndMess8085: "http://localhost:8085/api"
+  uploadFile8082: "http://localhost:8082/upload"
+myDetailService:
+  springJPA8081:
+    getDataWithUserEmailDTO: "/userController/getDataWithUserEmailDTO"
+    addUserGetString: "/userController/addUserGetString"
+    RestDTO: "/userController/RestDTO"
+    usersDTO: "/userController/usersDTO"
+    findByEmailId: "/userController/findByEmailId/{id}"
+  mess:
+    findById3: "/mess/findById/3"
+    deleteMess4: "/mess/deleteMess/4"
+  image:
+    uploadImageTest: "/image/status/uploadImageTest"
+myFile:
+  dddddd: "C:/Users/dai.dang/Desktop/MyGithub/uploadImage/dddddd.jpg"
+  Book11: "C:/Users/dai.dang/Desktop/MyGithub/uploadImage/Book11.xlsx"
+  uploadImage: "C:/Users/dai.dang/Desktop/MyGithub/uploadImage/"

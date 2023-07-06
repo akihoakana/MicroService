@@ -1,0 +1,100 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /user
+spring:
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          default-candidate: true
+          environment:
+            spring:
+            rabbitmq:
+            host: localhost
+            port: 5672
+            username: guest
+            password: guest
+            virtual-host: /
+      rabbit:
+        bindings:
+          inputGateWayQueue:
+            consumer:
+              bindingRoutingKey: ${myRabbit.GateWayQueue.routingKey}
+              queueNameGroupOnly: true
+          inputReactionQueue:
+            consumer:
+              bindingRoutingKey: ${myRabbit.ReactionQueue.routingKey}
+              queueNameGroupOnly: true
+          inputStatusQueue:
+            consumer:
+              bindingRoutingKey: ${myRabbit.StatusQueue.routingKey}
+              queueNameGroupOnly: true
+          inputMessQueue:
+            consumer:
+              bindingRoutingKey: ${myRabbit.MessQueue.routingKey}
+              queueNameGroupOnly: true
+      bindings:
+        inputGateWayQueue:
+          binder: rabbit1
+          group: ${myRabbit.GateWayQueue.name}
+          destination: ${myRabbit.exchange}
+        inputReactionQueue:
+          binder: rabbit1
+          group: ${myRabbit.ReactionQueue.name}
+          destination: ${myRabbit.exchange}
+        inputStatusQueue:
+          binder: rabbit1
+          group: ${myRabbit.StatusQueue.name}
+          destination: ${myRabbit.exchange}
+        inputMessQueue:
+          binder: rabbit1
+          group: ${myRabbit.MessQueue.name}
+          destination: ${myRabbit.exchange}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: Client-Service-UserSpringJPA8081
+  datasource:
+    url: jdbc:postgresql://localhost:5432/InternProject
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    initial-status: up
+    status-page-url-path: /info
+    home-page-url-path: /home
+    health-check-url: /health
+myMail:
+  test: "akihoakana@gmail.com"
+  testFrom:
+    username: "demotest1a23456789@gmail.com"
+    password: "xfoganmrtdjxesny"
+myRabbit:
+  exchange: "topic5555"
+  MessQueue:
+    name: "MessQueue"
+    routingKey: "*.mess.*"
+  StatusQueue:
+    name: "StatusQueue"
+    routingKey: "*.status.*"
+  ReactionQueue:
+    name: "ReactionQueue"
+    routingKey: "*.reaction.*"
+  GateWayQueue:
+    name: "GateWayQueue"
+    routingKey: "*.gateWay.*"
+

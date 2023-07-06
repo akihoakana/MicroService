@@ -1,0 +1,9 @@
+file:
+  input: inputlocal
+  output: outputlocal
+school:
+  industry:
+    class:
+      local: class local
+    room:
+      local: room local

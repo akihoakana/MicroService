@@ -1,0 +1,80 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          default-candidate: true
+          environment:
+            spring:
+            rabbitmq:
+            host: localhost
+            port: 5672
+            username: guest
+            password: guest
+            virtual-host: /
+      rabbit:
+        bindings:
+          outputGateWayQueue:
+            producer:
+              bindingRoutingKey: ${myRabbit.GateWayQueue.routingKey}
+              queueNameGroupOnly: true
+              routing-key-expression: '"${myRabbit.GateWayQueue.routingKey}"'
+      bindings:
+        outputGateWayQueue:
+          binder: rabbit1
+          group: ${myRabbit.GateWayQueue.name}
+          destination: ${myRabbit.exchange}
+    gateway:
+      routes:
+        - id: Client-Service-StatusAndMess8085
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/**
+          filters:
+            - AuthenticationFilter
+        - id: Client-Service-SpringBatch8084
+          uri: http://localhost:8084
+          predicates:
+            - Path=/batch/**
+          filters:
+            - AuthenticationFilter
+        - id: Client-Service-UploadFile8082
+          uri: http://localhost:8082
+          predicates:
+            - Path=/upload/**
+          filters:
+            - AuthenticationFilter
+        - id: Client-Service-UserSpringJPA8081
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/**
+    name: Client-Main-GateWay
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    initial-status: up
+    status-page-url-path: /info
+    home-page-url-path: /home
+    health-check-url: /health
+myRabbit:
+  exchange: "topic5555"
+  MessQueue:
+    name: "MessQueue"
+    routingKey: "*.mess.*"
+  StatusQueue:
+    name: "StatusQueue"
+    routingKey: "*.status.*"
+  ReactionQueue:
+    name: "ReactionQueue"
+    routingKey: "*.reaction.*"
+  GateWayQueue:
+    name: "GateWayQueue"
+    routingKey: "*.gateWay.*"
+

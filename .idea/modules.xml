@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/EurekaSever8761.iml" filepath="$PROJECT_DIR$/EurekaSever8761/EurekaSever8761.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/SpringBatch.iml" filepath="$PROJECT_DIR$/EurekaSever8761/SpringBatch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/SpringBatch8084.iml" filepath="$PROJECT_DIR$/EurekaSever8761/SpringBatch8084.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/SpringCloudGateWay8080.iml" filepath="$PROJECT_DIR$/EurekaSever8761/SpringCloudGateWay8080.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/StatusAndMess8085.iml" filepath="$PROJECT_DIR$/EurekaSever8761/StatusAndMess8085.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/UploadFile8082.iml" filepath="$PROJECT_DIR$/EurekaSever8761/UploadFile8082.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaSever8761/UserSpringJPA8081.iml" filepath="$PROJECT_DIR$/EurekaSever8761/UserSpringJPA8081.iml" />
+    </modules>
+  </component>
+</project>

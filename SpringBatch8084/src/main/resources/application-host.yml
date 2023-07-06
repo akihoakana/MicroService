@@ -1,0 +1,9 @@
+file:
+  input: inputhost
+  output: outputhost
+school:
+  industry:
+    class:
+      host: class host
+    room:
+      host: room host

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="StatusAndMess8085" />
+        <module name="UploadFile8082" />
+        <module name="SpringCloudGateWay8080" />
+        <module name="EurekaSever8761" />
+        <module name="SpringBatch8084" />
+        <module name="SpringBatch" />
+        <module name="UserSpringJPA8081" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="EurekaSever8761" target="11" />
+      <module name="SpringBatch" target="11" />
+      <module name="SpringBatch8084" target="11" />
+      <module name="SpringCloudGateWay8080" target="11" />
+      <module name="StatusAndMess8085" target="11" />
+      <module name="UploadFile8082" target="11" />
+      <module name="UserSpringJPA8081" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="EurekaSever8761" options="-parameters" />
+      <module name="SpringBatch" options="-parameters" />
+      <module name="SpringBatch8084" options="-parameters" />
+      <module name="SpringCloudGateWay8080" options="-parameters" />
+      <module name="StatusAndMess8085" options="-parameters" />
+      <module name="UploadFile8082" options="-parameters" />
+      <module name="UserSpringJPA8081" options="-parameters" />
+    </option>
+  </component>
+</project>

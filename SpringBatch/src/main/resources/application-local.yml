@@ -1,0 +1,33 @@
+spring.config.import: batch-postgresql.properties
+server:
+  port: 8091
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/batch
+    driver: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: batch
+  freemarker:
+    check-template-location: false
+
+  application:
+    name: batch-service
+  main:
+    allow-bean-definition-overriding: true

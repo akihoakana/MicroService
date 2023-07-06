@@ -1,0 +1,139 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /api
+spring:
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          default-candidate: true
+          environment:
+            spring:
+            rabbitmq:
+            host: localhost
+            port: 5672
+            username: guest
+            password: guest
+            virtual-host: /
+      rabbit:
+        bindings:
+          outputGateWayQueue:
+            producer:
+              bindingRoutingKey: ${myRabbit.GateWayQueue.routingKey}
+              queueNameGroupOnly: true
+              routing-key-expression: '"${myRabbit.GateWayQueue.routingKey}"'
+          outputReactionQueue:
+            producer:
+              bindingRoutingKey: ${myRabbit.ReactionQueue.routingKey}
+              queueNameGroupOnly: true
+              routing-key-expression: '"${myRabbit.ReactionQueue.routingKey}"'
+          outputStatusQueue:
+            producer:
+              bindingRoutingKey: ${myRabbit.StatusQueue.routingKey}
+              queueNameGroupOnly: true
+              routing-key-expression: '"${myRabbit.StatusQueue.routingKey}"'
+          outputMessQueue:
+            producer:
+              bindingRoutingKey: ${myRabbit.MessQueue.routingKey}
+              queueNameGroupOnly: true
+              routing-key-expression: '"${myRabbit.MessQueue.routingKey}"'
+          inputGateWayQueue:
+            consumer:
+              bindingRoutingKey: ${myRabbit.GateWayQueue.routingKey}
+              queueNameGroupOnly: true
+      bindings:
+        outputGateWayQueue:
+          binder: rabbit1
+          group: ${myRabbit.GateWayQueue.name}
+          destination: ${myRabbit.exchange}
+        outputReactionQueue:
+          binder: rabbit1
+          group: ${myRabbit.ReactionQueue.name}
+          destination: ${myRabbit.exchange}
+        outputStatusQueue:
+          binder: rabbit1
+          group: ${myRabbit.StatusQueue.name}
+          destination: ${myRabbit.exchange}
+        outputMessQueue:
+          binder: rabbit1
+          group: ${myRabbit.MessQueue.name}
+          destination: ${myRabbit.exchange}
+        inputGateWayQueue:
+          binder: rabbit1
+          group: ${myRabbit.GateWayQueue.name}
+          destination: ${myRabbit.exchange}
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: "public"
+    url: "jdbc:postgresql://localhost:5432/test1"
+    user: "postgres"
+    password: "postgres"
+
+  application:
+    name: Client-Service-StatusAndMess8085
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test1
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    initial-status: up
+    status-page-url-path: /info
+    home-page-url-path: /home
+    health-check-url: /health
+
+myHostService:
+  springJPA8081: "http://localhost:8081/user"
+  springBatch8084: "http://localhost:8084/batch"
+  statusAndMess8085: "http://localhost:8085/api"
+  uploadFile8082: "http://localhost:8082/upload"
+  uploadImage8082: "http://localhost:8082/upload/image"
+myDetailService:
+  springJPA8081:
+    getDataWithUserEmailDTO: "/userController/getDataWithUserEmailDTO"
+    addUserGetString: "/userController/addUserGetString"
+    RestDTO: "/userController/RestDTO"
+    usersDTO: "/userController/usersDTO"
+    findByEmailId: "/userController/findByEmailId/{id}"
+  mess:
+    findById3: "/mess/findById/3"
+    deleteMess4: "/mess/deleteMess/4"
+  image:
+    uploadImageTest: "/image/status/uploadImageTest"
+myMail:
+  test: "akihoakana@gmail.com"
+  testFrom:
+    username: "demotest1a23456789@gmail.com"
+    password: "xfoganmrtdjxesny"
+myRabbit:
+  exchange: "topic5555"
+  MessQueue:
+    name: "MessQueue"
+    routingKey: "*.mess.*"
+  StatusQueue:
+    name: "StatusQueue"
+    routingKey: "*.status.*"
+  ReactionQueue:
+    name: "ReactionQueue"
+    routingKey: "*.reaction.*"
+  GateWayQueue:
+    name: "GateWayQueue"
+    routingKey: "*.gateWay.*"
